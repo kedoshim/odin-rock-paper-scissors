@@ -1,0 +1,60 @@
+body {
+    font-family: "Times New Roman", Times, serif, Haettenschweiler,
+        "Arial Narrow Bold", sans-serif;
+}
+
+.title {
+    font-size: xx-large;
+    text-align: center;
+}
+
+.deathmatch {
+    color: crimson;
+    font-style: italic;
+    font-size: 4vw;
+    margin: -2vw 0 0 0;
+    height: 10vw;
+}
+
+.deathmatch:hover {
+    transition: 0.1s;
+    color: #f0daf1;
+    font-size: 5vw;
+    text-shadow: 2px 0 #000, -2px 0 #000, 0 2px #000, 0 -2px #000, 1px 1px #000,
+        -1px -1px #000, 1px -1px #000, -1px 1px #000;
+}
+
+.flex-buttons {
+    display: flex;
+    width: 70vw;
+    height: 30vh;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.button {
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    width: 15vw;
+    height: 10vw;
+    background-color: crimson;
+    color: #f0daf1;
+    font-weight: 900;
+    font-size: 2vw;
+    font-style: italic;
+    border: 0;
+    border-radius: 3%;
+}
+
+.button:hover {
+    transition: 0.1s;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    width: 15vw;
+    height: 10vw;
+    background-color: #f0daf1;
+    color: crimson;
+    font-weight: 900;
+    font-size: 2.5vw;
+    border: 0.5vw double rgb(46, 0, 12);
+    font-style: italic;
+}

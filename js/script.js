@@ -11,7 +11,7 @@ function main() {
 
     let score = 0;
 
-    let player_choice = prompt(`What is your choice?`).toLowerCase();
+    // let player_choice = prompt(`What is your choice?`).toLowerCase();
 
     if (![ROCK, PAPER, SCISSORS].includes(player_choice)) {
         console.log(
