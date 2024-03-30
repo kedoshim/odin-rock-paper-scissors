@@ -5,6 +5,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   height: 100vh;
   width: 100%;
   box-sizing: border-box;
@@ -12,6 +13,15 @@ body {
   padding: 0;
   border: 0;
   position: fixed;
+}
+
+#final-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #title-div {
@@ -82,7 +92,6 @@ body {
   transition: 0.1s;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   width: 15vw;
-  height: 10vw;
   background-color: #fff;
   color: crimson;
   font-weight: 900;

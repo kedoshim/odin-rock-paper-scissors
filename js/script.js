@@ -10,19 +10,69 @@ const DRAW = 0;
 let score = 0;
 let round = 0;
 
-const button_div = document.querySelector("#button-div");
-const start_button = document.querySelector("#start");
+const initial_page_content = document.body.innerHTML;
+
+let button_div = document.querySelector("#button-div");
+let start_button = document.querySelector("#start");
 start_button.addEventListener("click", startGame, { once: true });
 
-const player_scoreboard = document.querySelector("#player-score");
-const computer_scoreboard = document.querySelector("#computer-score");
+let player_scoreboard = document.querySelector("#player-score");
+let computer_scoreboard = document.querySelector("#computer-score");
 
-function runGame() {
-  while (true) {
-    if (round < 5) {
-      return;
-    }
+setupPage();
+
+function setupRestartedPage() {
+  button_div = document.querySelector("#button-div");
+  start_button = document.querySelector("#start");
+  start_button.addEventListener("click", startGame, { once: true });
+
+  player_scoreboard = document.querySelector("#player-score");
+  computer_scoreboard = document.querySelector("#computer-score");
+}
+
+function setFinalMessage(object) {
+  if (score > 0) {
+    object.textContent = "YOU SURVIVED";
+  } else if (score < 0) {
+    object.textContent = "YOU DIED";
+  } else {
+    object.textContent = "we both survive, i guess...\nwanna try again?";
   }
+}
+
+function restartGame() {
+  score = 0;
+  round = 0;
+
+  // Restore the initial content of the body
+  document.body.innerHTML = initial_page_content;
+
+  setupRestartedPage();
+}
+
+function changeBody(new_body) {
+  document.body.innerHTML = "";
+  document.body.appendChild(new_body);
+}
+
+function endGame() {
+  const final_screen = document.createElement("div");
+  const final_message = document.createElement("h1");
+  const restart_button = document.createElement("button");
+
+  final_screen.style.backgroundColor = "crimson";
+  final_screen.id = "final-screen";
+
+  final_message.classList.toggle("title");
+  setFinalMessage(final_message);
+
+  restart_button.classList.toggle("button");
+  restart_button.textContent = "restart?";
+  restart_button.addEventListener("click", restartGame, { once: true });
+
+  final_screen.appendChild(final_message);
+  final_screen.appendChild(restart_button);
+  changeBody(final_screen);
 }
 
 function startGame() {
@@ -30,8 +80,6 @@ function startGame() {
 
   updateButtons();
   startResultDiv();
-
-  runGame();
 }
 
 function startResultDiv() {
@@ -126,6 +174,8 @@ function playRound(player_choice_event) {
   round += 1;
 
   console.log(`score:${score} round:${round}`);
+
+  if (round >= 5) endGame();
 }
 
 function getWinner(choice1, choice2) {
