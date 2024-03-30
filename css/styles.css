@@ -103,8 +103,11 @@ body {
 .scoreboard {
   display: flex;
   flex-direction: column-reverse;
+  align-items: center;
   width: 3vw;
   height: 20vh;
+  gap: 0.5vh;
+  padding-bottom: 0.5vh;
   border-bottom: 0.5vh solid black;
 }
 
@@ -122,6 +125,10 @@ body {
   text-align: center;
   color: black;
   text-decoration-line: none;
+}
+
+.point {
+  width: 2vw;
 }
 
 #attribuition:hover {

@@ -1,3 +1,4 @@
+const NUMBER_OF_ROUNDS = 5;
 const ERROR = "error";
 const ROCK = "rock";
 const PAPER = "paper";
@@ -6,11 +7,23 @@ const VICTORY = 1;
 const LOSS = -1;
 const DRAW = 0;
 
+let score = 0;
+let round = 0;
+
 const button_div = document.querySelector("#button-div");
 const start_button = document.querySelector("#start");
-start_button.addEventListener("click", startGame);
+start_button.addEventListener("click", startGame, { once: true });
 
-function setupButtons() {}
+const player_scoreboard = document.querySelector("#player-score");
+const computer_scoreboard = document.querySelector("#computer-score");
+
+function runGame() {
+  while (true) {
+    if (round < 5) {
+      return;
+    }
+  }
+}
 
 function startGame() {
   console.log("ROCK-PAPER-SCISSORS 5 ROUND DEATHMATCH - START!");
@@ -18,7 +31,7 @@ function startGame() {
   updateButtons();
   startResultDiv();
 
-  let score = 0;
+  runGame();
 }
 
 function startResultDiv() {
@@ -51,7 +64,7 @@ function createGameButtons() {
   paper_button.id = "paper";
   paper_button.classList.toggle("button");
   paper_button.textContent = "PAPER";
-  scissors_button.id = "scissor";
+  scissors_button.id = "scissors";
   scissors_button.classList.toggle("button");
   scissors_button.textContent = "SCISSORS";
 
@@ -64,11 +77,34 @@ function createGameButtons() {
   return buttons;
 }
 
-function logResults(result) {
+function createPoint() {
+  const point = document.createElement("img");
+  point.src = "img/coin.png";
+  point.classList.toggle("point");
+
+  return point;
+}
+
+function addPointToPlayer() {
+  const point = createPoint();
+
+  player_scoreboard.appendChild(point);
+}
+
+function addPointToComputer() {
+  const point = createPoint();
+
+  computer_scoreboard.appendChild(point);
+}
+
+function setResults(result) {
+  console.log(result);
   if (result === VICTORY) {
-    console.log("YOU WON THE DEATHMATCH!");
+    console.log("YOU WON!");
+    addPointToPlayer();
   } else if (result === LOSS) {
     console.log("YOU LOSE!");
+    addPointToComputer();
   } else {
     console.log("YOU DRAW!");
   }
@@ -84,7 +120,12 @@ function playRound(player_choice_event) {
 
   let result = getWinner(player_choice, computer_choice);
 
-  logResults(result);
+  setResults(result);
+
+  score += result;
+  round += 1;
+
+  console.log(`score:${score} round:${round}`);
 }
 
 function getWinner(choice1, choice2) {
@@ -97,8 +138,6 @@ function getWinner(choice1, choice2) {
           return LOSS;
         case SCISSORS:
           return VICTORY;
-        default:
-          return ERROR;
       }
     case PAPER:
       switch (choice2) {
@@ -108,8 +147,6 @@ function getWinner(choice1, choice2) {
           return DRAW;
         case SCISSORS:
           return LOSS;
-        default:
-          return ERROR;
       }
     case SCISSORS:
       switch (choice2) {
@@ -119,8 +156,6 @@ function getWinner(choice1, choice2) {
           return VICTORY;
         case SCISSORS:
           return DRAW;
-        default:
-          return ERROR;
       }
   }
 }
