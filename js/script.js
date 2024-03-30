@@ -6,40 +6,38 @@ const P1_VICTORY = 1;
 const P2_VICTORY = -1;
 const DRAW = 0;
 
-function main() {
-    console.log("ROCK-PAPER-SCISSORS 5 ROUND DEATHMATCH - START!");
+console.log("ROCK-PAPER-SCISSORS 5 ROUND DEATHMATCH - START!");
 
-    let score = 0;
+let score = 0;
 
-    // let player_choice = prompt(`What is your choice?`).toLowerCase();
+const buttons = document.querySelectorAll("button");
 
-    if (![ROCK, PAPER, SCISSORS].includes(player_choice)) {
-        console.log(
-            `invalid choice! You chose ${player_choice}\nWrite 'rock','paper' or 'scissors'`
-        );
-        main();
-        return;
-    }
+buttons.forEach((button) =>
+    button.addEventListener("click", (e) => playRound(e))
+);
 
-    score += Round(player_choice);
-
-    if (score == P1_VICTORY) {
+function logResults(result) {
+    if (result === P1_VICTORY) {
         console.log("YOU WON THE DEATHMATCH!");
     }
-    if (score == P2_VICTORY) {
+    else if (result === P2_VICTORY) {
         console.log("YOU LOSE!");
     } else {
         console.log("YOU DRAW!");
     }
 }
 
-function Round(player_choice) {
+function playRound(player_choice_event) {
+    const player_choice = player_choice_event.target.id;
+
+    console.log(`You played ${player_choice.toUpperCase()}`);
+
     let computer_choice = getComputerChoice();
-    console.log(`Computer played ${computer_choice}`);
+    console.log(`Computer played ${computer_choice.toUpperCase()}`);
 
     let result = getWinner(player_choice, computer_choice);
 
-    return result;
+    logResults(result);
 }
 
 function getWinner(choice1, choice2) {
@@ -89,5 +87,3 @@ function getComputerChoice() {
         return SCISSORS;
     }
 }
-
-main();
