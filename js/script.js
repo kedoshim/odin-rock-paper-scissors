@@ -2,8 +2,8 @@ const ERROR = "error";
 const ROCK = "rock";
 const PAPER = "paper";
 const SCISSORS = "scissors";
-const P1_VICTORY = 1;
-const P2_VICTORY = -1;
+const VICTORY = 1;
+const LOSS = -1;
 const DRAW = 0;
 
 const button_div = document.querySelector("#button-div");
@@ -16,8 +16,14 @@ function startGame() {
   console.log("ROCK-PAPER-SCISSORS 5 ROUND DEATHMATCH - START!");
 
   updateButtons();
+  startResultDiv();
 
   let score = 0;
+}
+
+function startResultDiv() {
+  const result_div = document.querySelector("#result-div");
+  result_div.style.opacity = "1";
 }
 
 function removeStartButton() {
@@ -59,9 +65,9 @@ function createGameButtons() {
 }
 
 function logResults(result) {
-  if (result === P1_VICTORY) {
+  if (result === VICTORY) {
     console.log("YOU WON THE DEATHMATCH!");
-  } else if (result === P2_VICTORY) {
+  } else if (result === LOSS) {
     console.log("YOU LOSE!");
   } else {
     console.log("YOU DRAW!");
@@ -88,29 +94,29 @@ function getWinner(choice1, choice2) {
         case ROCK:
           return DRAW;
         case PAPER:
-          return P2_VICTORY;
+          return LOSS;
         case SCISSORS:
-          return P1_VICTORY;
+          return VICTORY;
         default:
           return ERROR;
       }
     case PAPER:
       switch (choice2) {
         case ROCK:
-          return P1_VICTORY;
+          return VICTORY;
         case PAPER:
           return DRAW;
         case SCISSORS:
-          return P2_VICTORY;
+          return LOSS;
         default:
           return ERROR;
       }
     case SCISSORS:
       switch (choice2) {
         case ROCK:
-          return P2_VICTORY;
+          return LOSS;
         case PAPER:
-          return P1_VICTORY;
+          return VICTORY;
         case SCISSORS:
           return DRAW;
         default:
